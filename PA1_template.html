@@ -145,7 +145,7 @@ print(stepsByDayMean)</code></pre>
 <pre><code>## [1] 9354.23</code></pre>
 <pre class="r"><code>print(stepsByDayMedian)</code></pre>
 <pre><code>## [1] 10395</code></pre>
-<p>Mean: 9354.2295082 Median: 10395</p>
+<p>Mean: 9354.23 Median: 1.039510^{4}</p>
 <p>**What is the average daily activity pattern?</p>
 <p>Make a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis) Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?</p>
 <ul>
@@ -160,7 +160,7 @@ plot(x=avg_steps_per_interval$interval, y=avg_steps_per_interval$avg_steps, type
 print(max_avg_step_data)</code></pre>
 <pre><code>##     interval avg_steps
 ## 104      835  206.1698</code></pre>
-<p>Maximum Avg Steps occurs at : ‘r max_avg_step_data’</p>
+<p>Maximum Avg Steps occurs at : ‘r 835’</p>
 <p>**Imputing missing values</p>
 <p>Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs) Devise a strategy for filling in all of the missing values in the dataset. Make a histogram of the total number of steps taken each day Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?</p>
 <ul>
@@ -169,7 +169,7 @@ print(max_avg_step_data)</code></pre>
 <pre class="r"><code>total_missing=sum(is.na(activity_raw))
 print(total_missing)</code></pre>
 <pre><code>## [1] 2304</code></pre>
-<p>Total ROws with NAs: ‘r print(total_missing)’</p>
+<p>Total ROws with NAs: ‘r 2304’</p>
 <p><em>to replace the NAs in steps </em> 1 get the NAs and create a logical vector * 2 calculate the means at every interval without the NAs * 3 replace each missing step with the mean as calculated above</p>
 <pre class="r"><code>step_nas &lt;- is.na(activity_raw$steps)
 avg_interval_imputed &lt;- tapply(activity_raw$steps, activity_raw$interval, mean, na.rm=TRUE, simplify=TRUE)
@@ -185,7 +185,7 @@ print(stepsByDayMean_imputed)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
 <pre class="r"><code>print(stepsByDayMedian_imputed)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
-<p>Mean with Imputed NAs: 1.076618910^{4} Median with Imputed NAs: 1.076618910^{4} Mean removing NAs: 9354.2295082 Median removing NAs : 10395</p>
+<p>Mean with Imputed NAs: 1.07661910^{4} Median with Imputed NAs: 1.07661910^{4} Mean removing NAs: 9354.23 Median removing NAs : `r 10395’</p>
 <ul>
 <li>calculate the change in mean and median when imputation is used</li>
 </ul>
@@ -196,10 +196,10 @@ print(difference_in_mean)</code></pre>
 <pre><code>## [1] 1411.959</code></pre>
 <pre class="r"><code>print(difference_in_median)</code></pre>
 <pre><code>## [1] 371.1887</code></pre>
-<p>Imputation has caused the mean to increase by : ‘r difference_in_mean’ Imputation has caused the median to increase by : ‘r difference_in_median’</p>
+<p>Imputation has caused the mean to increase by : ‘r 1411.959’ Imputation has caused the median to increase by : ‘r 371.1887’</p>
 <p>**Are there differences in activity patterns between weekdays and weekends?</p>
 <p>For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.</p>
-<p>Create a new factor variable in the dataset with two levels - “weekday” and “weekend”. Make a panel plot containing a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</p>
+<p>Create a new factor variable in the dataset with two levels – “weekday” and “weekend”. Make a panel plot containing a time series plot (i.e. type = “l”) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).</p>
 <p><em>create a new variable that categorises the day as weekday or weekend </em>make it a factor</p>
 <pre class="r"><code>activity_raw2 &lt;- mutate(activity_raw, weektype = ifelse(weekdays(activity_raw$date2) == &quot;Saturday&quot; | weekdays(activity_raw$date2) == &quot;Sunday&quot;, &quot;weekend&quot;, &quot;weekday&quot;))
 activity_raw2$weektype &lt;- as.factor(activity_raw2$weektype)</code></pre>
